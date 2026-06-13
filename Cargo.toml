@@ -1,0 +1,11 @@
+[package]
+name = "hotline-miami"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+macroquad = "0.4"
+
+[[bin]]
+name = "hotline_miami"
+path = "src/main.rs"

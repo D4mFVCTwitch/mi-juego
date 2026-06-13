@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lugar Secreto - Vanilla JS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0a0e27;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            border: 3px solid #fb5607;
+        }
+        #ui {
+            position: absolute;
+            color: #06ffa5;
+            font-size: 18px;
+            font-weight: bold;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        #wave-info {
+            position: absolute;
+            color: #fb5607;
+            font-size: 16px;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="ui">
+        <div id="health">HP: 100/100</div>
+    </div>
+    <div id="wave-info">
+        <div>Wave: 1</div>
+        <div>Enemies: 0</div>
+    </div>
+    <div id="menu" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:200">
+        <div style="background:#081028;padding:24px;border:3px solid #fb5607;color:#fff;width:360px">
+            <div id="menu-start" style="text-align:center">
+                <h2 style="margin-bottom:12px">Lugar Secreto</h2>
+                <button id="start-btn" style="background:#fb5607;border:none;padding:12px 20px;color:#081028;font-weight:bold;cursor:pointer">Comenzar</button>
+            </div>
+
+            <div id="menu-form" style="display:none;margin-top:8px">
+                <h3 style="margin-bottom:8px">Personaliza</h3>
+                <label style="display:block;margin-bottom:8px">Nombre:</label>
+                <input id="player-name" type="text" placeholder="Tu nombre" style="width:100%;padding:8px;margin-bottom:12px" />
+                <label style="display:block;margin-bottom:8px">Color:</label>
+                <div style="display:flex;gap:8px;margin-bottom:12px">
+                    <label><input type="radio" name="color" value="#ffffff" checked/> Blanco</label>
+                    <label><input type="radio" name="color" value="#ff4d6d"/> Rojo</label>
+                    <label><input type="radio" name="color" value="#06ffa5"/> Verde</label>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:8px">
+                    <button id="menu-back" style="background:#2b2f3a;border:none;padding:8px 12px;color:#fff;cursor:pointer">Atrás</button>
+                    <button id="listo-btn" style="background:#06ffa5;border:none;padding:8px 12px;color:#082018;font-weight:bold;cursor:pointer">Listo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const menuStart = document.getElementById('menu-start');
+        const menuForm = document.getElementById('menu-form');
+        const listo = document.getElementById('listo-btn');
+        const backBtn = document.getElementById('menu-back');
+
+        startBtn.addEventListener('click', () => {
+            menuStart.style.display = 'none';
+            menuForm.style.display = 'block';
+        });
+
+        backBtn.addEventListener('click', () => {
+            menuForm.style.display = 'none';
+            menuStart.style.display = 'block';
+        });
+
+        listo.addEventListener('click', () => {
+            if (window.startGame) window.startGame();
+        });
+    </script>
+</body>
+</html>
